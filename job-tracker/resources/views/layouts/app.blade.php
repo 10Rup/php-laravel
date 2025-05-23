@@ -16,6 +16,13 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+            @if(Auth::check())
+                <p>Welcome, {{ Auth::user()->name }} | <form method="POST" action="{{ route('logout') }}" style="display:inline">@csrf <button type="submit">Logout</button></form></p>
+            @else
+                <a href="{{ route('login') }}">Login</a> | 
+                <a href="{{ route('register') }}">Register</a>
+            @endif
+
             @include('layouts.navigation')
 
             <!-- Page Heading -->
