@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +20,10 @@ Route::get('/', function () {
 Route::get('/registration', function (){
     return view('registration');
 });
+
+
+// Route::post('/new-user', function (){
+//     return "this is new user page";
+// })->name('newUser');
+
+Route::post('/new-user-details', [UserController::class,'show'])->name('newUser');
