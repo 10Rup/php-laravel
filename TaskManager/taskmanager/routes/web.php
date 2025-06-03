@@ -32,6 +32,8 @@ Route::get('/', [UserController::class, 'show'])->name('home');
 Route::prefix('/user')->group(function () {
     // Route::get('/', [UserController::class, 'show'])->name('show-users');
     Route::post('/create', [UserController::class, 'create'])->name('create-user');
-    Route::get('/{id}/edit', [UserController::class, 'edit'])->name('edit-user');
+    Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit-user');
+    Route::put('/update/{id}', [UserController::class, 'update'])->name('update-user');
+    Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('delete-user');
 });
 
