@@ -10,7 +10,9 @@
     <div>
         <h1>Home Page</h1>
         <a href="{{route('signup')}}">Sign up Page</a>
-        <div>
+        <a href="{{ route('login') }}">Sign in Page</a>
+        <div>  
+        
                 @foreach($users as $user)
                     <section>                              
                         <p>Name : {{$user->name}}</p>
@@ -33,9 +35,13 @@
                     <button type="button" onclick="confirm_delete({{ $user }})">Delete</button>
                     <hr>
                 @endforeach
+
             
         </div>
     </div>
+
+
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
