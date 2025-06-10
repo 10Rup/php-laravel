@@ -7,7 +7,8 @@
 </head>
 <body>
     <div>
-        <form action="{{route('profile')}}" method="GET">
+        <form action="{{route('profile')}}" method="POST">
+            @csrf
             <label for="username">UserName : </label> 
             <input type="text" id="username" name='username' value="{{ old('username') }}">
 

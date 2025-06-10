@@ -29,15 +29,7 @@ Route::get('/user-signup-page', function () {
 
 // Route::get('/user/SignUp', [UserController::class, 'registration'])->name('add-user');
 
-Route::get('/', [UserController::class, 'show'])->name('home');
-Route::get('/sing-in-page',function (){
-    return view('user.loginV2');
-})->name('login-page');
 
-
-
-
-Route::post('/logout', [UserAuthController::class, 'logout'])->name('logout');
 
 
 Route::prefix('/user')->group(function () {
@@ -48,4 +40,7 @@ Route::prefix('/user')->group(function () {
     Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('delete-user');
 });
 
+Route::get('/', [UserController::class, 'show'])->name('home');
+Route::get('/sing-in-page',[UserAuthController::class, 'showLoginPage'])->name('login-page');
 Route::post('/profile', [UserAuthController::class, 'login'])->name('profile');
+Route::post('/logout', [UserAuthController::class, 'logout'])->name('logout');

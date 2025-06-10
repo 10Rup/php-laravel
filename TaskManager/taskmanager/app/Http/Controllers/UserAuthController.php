@@ -7,7 +7,12 @@ use App\Models\User;
 
 
 class UserAuthController extends Controller
-{
+{   
+
+    public function showLoginPage(){
+        return view('user.loginV2');
+    }
+
     public function login(Request $request){
         $user = User::where('email', $request->username)->first();
         // echo $request->username;
@@ -15,7 +20,8 @@ class UserAuthController extends Controller
             Auth::login($user);
             $request->session()->regenerate();
             // return redirect()->intended('user.profile');
-            return route('user.profile', ['user' => $user, 'request' => $request]);
+            // return route('user.profile', ['user' => $user, 'request' => $request]);
+            return view('user.profile', ['user' => $user, 'request' => $request]);
         }
         return back()->withErrors([
             'username' => 'Invalid User'
@@ -28,7 +34,7 @@ class UserAuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect()->route('login-page');
         // return "logout successfull";
         // return redirect()->route('login');
     }

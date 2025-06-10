@@ -10,7 +10,7 @@
     <div>
         <h1>Home Page</h1>
         <a href="{{route('signup')}}">Sign up Page</a>
-        <a href="{{ route('login') }}">Sign in Page</a>
+        <a href="{{ route('login-page') }}">Sign in Page</a>
         <div>
             @foreach($users as $user)
                 <div x-data="{ name: '{{ $user->name }}', email: '{{ $user->email }}' }">
