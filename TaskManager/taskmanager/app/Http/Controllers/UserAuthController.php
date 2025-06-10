@@ -15,10 +15,21 @@ class UserAuthController extends Controller
             Auth::login($user);
             $request->session()->regenerate();
             // return redirect()->intended('user.profile');
-            return view('user.profile', ['user' => $user, 'request' => $request]);
+            return route('user.profile', ['user' => $user, 'request' => $request]);
         }
         return back()->withErrors([
             'username' => 'Invalid User'
         ]);
+    }
+
+
+    public function logout(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
+        // return "logout successfull";
+        // return redirect()->route('login');
     }
 }

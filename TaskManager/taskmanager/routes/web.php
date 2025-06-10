@@ -30,9 +30,16 @@ Route::get('/user-signup-page', function () {
 // Route::get('/user/SignUp', [UserController::class, 'registration'])->name('add-user');
 
 Route::get('/', [UserController::class, 'show'])->name('home');
-Route::get('/login',function (){
-    return view('user.login');
-})->name('login');
+Route::get('/sing-in-page',function (){
+    return view('user.loginV2');
+})->name('login-page');
+
+
+
+
+Route::post('/logout', [UserAuthController::class, 'logout'])->name('logout');
+
+
 Route::prefix('/user')->group(function () {
     // Route::get('/', [UserController::class, 'show'])->name('show-users');
     Route::post('/create', [UserController::class, 'create'])->name('create-user');
