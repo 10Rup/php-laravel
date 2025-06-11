@@ -8,7 +8,7 @@
 <body>
 
     <div>
-        <h1>Home Page</h1>
+        <h1>Home Page v2</h1>
         <a href="{{route('signup')}}">Sign up Page</a>
         <a href="{{ route('login-page') }}">Sign in Page</a>
         <div>

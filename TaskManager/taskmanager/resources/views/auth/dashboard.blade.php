@@ -6,14 +6,12 @@
     <title>Profile</title>
 </head>
 <body>
-    <h1>{{$user->name}}</h1>
+    <h1>Dashboard</h1>
+    <h2>User : {{ auth()->user()->name }}</h2>
     <!-- <a href="{{ route('logout') }}">Logout</a> -->
     <form action="{{ route('logout') }}" method="POST">
         @csrf
-        @method('POST')
         <button>Logout</button>
     </form>
-    <pre>{{ $request }}</pre>
-    
 </body>
 </html>

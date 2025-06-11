@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,6 +42,21 @@ Route::prefix('/user')->group(function () {
 });
 
 Route::get('/', [UserController::class, 'show'])->name('home');
-Route::get('/sing-in-page',[UserAuthController::class, 'showLoginPage'])->name('login-page');
-Route::post('/profile', [UserAuthController::class, 'login'])->name('profile');
-Route::post('/logout', [UserAuthController::class, 'logout'])->name('logout');
+// Route::get('/sing-in-page',[UserAuthController::class, 'showLoginPage'])->name('login-page');
+
+// Route::get('/profile', function() {
+//     $user = Auth::user();
+//     return view('user.profile', ['userdata' => $user]);
+// })->name('user.profile');
+// Route::get('/profile', [UserAuthController::class, 'loginV2'])->name('user.profile');
+// Route::get('/profile', [UserAuthController::class, 'loginV2'])->name('user.profile')->middleware('auth');
+// Route::post('/logout', [UserAuthController::class, 'logout'])->name('logout');
+
+
+Route::get("/login",[AuthController::class, 'showLoginPage'])->name('login-page');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+Route::middleware('auth.custom')->group(function (){
+    Route::get('/dashboard', [AuthController::class,'dashboard'])->name('dashboard');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});

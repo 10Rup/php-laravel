@@ -3,19 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page V2</title>
+    <title>Login Page</title>
 </head>
 <body>
+    <a href="{{route('home')}}">Home</a>
     <div>
-        <form action="{{route('profile')}}" method="POST">
+        @error('auth')
+            <div>{{ $message }}</div>
+        @enderror
+
+        @error('login')
+            <div>{{ $message }}</div>
+        @enderror
+
+        <form action="{{route('login')}}" method="POST">
             @csrf
             <label for="username">UserName : </label> 
             <input type="text" id="username" name='username' value="{{ old('username') }}">
-
-            @error('username')
-            <div>{{ $message }}</div>
-            @enderror
-        
             <button type='Submit'>Login</button>
         </form>
     </div>

@@ -16,18 +16,57 @@ class UserAuthController extends Controller
     public function login(Request $request){
         $user = User::where('email', $request->username)->first();
         // echo $request->username;
+        return $user;
+        // if($user){
+        //     Auth::login($user);
+        //     $request->session()->regenerate();
+        //     return redirect()->route('user.profile');
+        // }
+        // return back()->withErrors([
+        //     'username' => 'Invalid User'
+        // ]);
+    }
+
+
+    public function loginV1(Request $request){
+        $user = User::where('email', $request->username)->first();
         if($user){
             Auth::login($user);
+            $userData = Auth::user();
             $request->session()->regenerate();
-            // return redirect()->intended('user.profile');
-            // return route('user.profile', ['user' => $user, 'request' => $request]);
-            return view('user.profile', ['user' => $user, 'request' => $request]);
+
+            // if (Auth::check()) {
+            //     dd('User is logged in: ' . Auth::user()->name);
+            // } else {
+            //     dd('Login failed to persist.');
+            // }
+            // $dataCheck = Auth::check();
+            // return $dataCheck;
+            return view('user.profile', ['userdata' => $userData, 'request' => $request]);
+            // return redirect()->route('user.profile']);
         }
         return back()->withErrors([
             'username' => 'Invalid User'
         ]);
+
+
     }
 
+        public function loginV2(Request $request){
+        $user = User::where('email', $request->username)->first();
+        if($user){
+            Auth::login($user);
+            $userData = Auth::user();
+            $request->session()->regenerate();
+
+            return view('user.profile', ['userdata' => $userData, 'request' => $request]);
+        }
+        return back()->withErrors([
+            'username' => 'Invalid User'
+        ]);
+
+
+    }
 
     public function logout(Request $request){
         Auth::logout();
