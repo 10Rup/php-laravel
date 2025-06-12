@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TaskController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,6 +66,8 @@ Route::middleware(['auth.custom', 'role:admin'])->group(function (){
 
 Route::middleware(['auth.custom', 'role:user'])->group(function (){
     Route::get('/user/dashboard', [AuthController::class, 'userDashboard'])->name('user.dashboard');
+    Route::get('/user/create-task', [TaskController::class, 'createTask'])->name('create-task');
+
 });
 
 Route::middleware('auth.custom')->group(function (){

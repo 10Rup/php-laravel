@@ -6,9 +6,9 @@
     <title>Profile</title>
 </head>
 <body>
-    <h1>{{ auth()->user()->role }} Dashboard</h1>
+    <h1>User's Dashboard</h1>
     <h2>User : {{ auth()->user()->name }}</h2>
-    <!-- <a href="{{ route('logout') }}">Logout</a> -->
+    <a href="{{ route('create-task') }}">Add Task</a>
     <form action="{{ route('logout') }}" method="POST">
         @csrf
         <button>Logout</button>
