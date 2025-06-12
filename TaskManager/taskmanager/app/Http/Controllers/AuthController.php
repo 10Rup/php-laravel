@@ -16,7 +16,18 @@ class AuthController extends Controller
         if($user){
             Auth::login($user);
             $request->session()->regenerate();
-            return redirect()->intended('dashboard');
+
+            if($user->role == 'admin'){
+                return redirect()->intended('admin/dashboard');
+            }
+            elseif($user->role == 'user'){
+                return redirect()->intended('user/dashboard');
+            }
+            else{
+                return redirect()->intended('home');
+            }
+
+            
         }
         return back()->withErrors([
             'login' => 'Invalid User'
@@ -24,9 +35,14 @@ class AuthController extends Controller
 
     }
 
-    public function dashboard(Request $request) {
+    public function adminDashboard(Request $request) {
+        $userList = User::all();
+        return view('auth.dashboard',['request' => $request, 'users' => $userList]);
+    }
+
+    public function userDashboard(Request $request) {
         
-        return view('auth.dashboard',['request' => $request]);
+        return view('user.dashboard',['request' => $request]);
     }
 
     public function logout(Request $request){

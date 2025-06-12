@@ -56,7 +56,17 @@ Route::get('/', [UserController::class, 'show'])->name('home');
 Route::get("/login",[AuthController::class, 'showLoginPage'])->name('login-page');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
+
+
+
+Route::middleware(['auth.custom', 'role:admin'])->group(function (){
+    Route::get('/admin/dashboard', [AuthController::class,'adminDashboard'])->name('admin.dashboard');
+});
+
+Route::middleware(['auth.custom', 'role:user'])->group(function (){
+    Route::get('/user/dashboard', [AuthController::class, 'userDashboard'])->name('user.dashboard');
+});
+
 Route::middleware('auth.custom')->group(function (){
-    Route::get('/dashboard', [AuthController::class,'dashboard'])->name('dashboard');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
