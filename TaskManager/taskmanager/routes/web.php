@@ -53,7 +53,7 @@ Route::get('/', [UserController::class, 'show'])->name('home');
 // Route::get('/profile', [UserAuthController::class, 'loginV2'])->name('user.profile')->middleware('auth');
 // Route::post('/logout', [UserAuthController::class, 'logout'])->name('logout');
 
-
+//  test
 Route::get("/login",[AuthController::class, 'showLoginPage'])->name('login-page');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
